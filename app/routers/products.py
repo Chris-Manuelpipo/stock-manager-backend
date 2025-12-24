@@ -28,7 +28,7 @@ def get_db():
 @router.get("/", response_model=List[schemas.Product])
 def get_products(
     search: str | None = None,
-    limit: int = 10,
+    limit: int = 100,
     offset: int = 0,
     db: Session = Depends(get_db)
 ):
@@ -39,7 +39,7 @@ def get_products(
 
 
 # Ajouter un produit
-@router.post("/", response_model=schemas.Product)
+@router.post("/create", response_model=schemas.Product)
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
     # Si category_id est fourni, vérifier qu'il existe
     if product.category_id:
